@@ -5,18 +5,27 @@ use std::fs;
 use reqwest::Error;
 
 
+
 // #[tokio::main]
 // async fn get(url: &str) ->Result<(), Error>
 // 
 #[tokio::main]
-async fn get(url: &str) -> Result<(), Error> {
+async fn get(url: &str,time: String) -> Result<(), Error> {
     let response = reqwest::get(url)
     .await?
     .text()
     .await?;
-    println!("{}",response);
+    println!("{}sent at :{}",response,time);
+    write(time,response)
+    .expect("ERROING WRITEING RESPONSE FILE");
     Ok(())
 }
+
+fn write(name: String, body: String) -> std::io::Result<()>{
+    fs::write(name,body)?;
+    Ok(())
+}
+
 
 // i can make it so the tokio response stores the info in 
 // a file because it give acces to file system
@@ -42,6 +51,8 @@ fn list_files() {
         println!("{}", i.path().display());
     }
 }
+
+
 
 
 fn main() {
@@ -79,6 +90,14 @@ fn main() {
     }
     url
 };
+
+//so with the idea of sending the request into a file
+// (like whenver i send a request and get a response
+// store that info into a new file with the time
+// as the name and then also store the request time
+// in a seperate log so you can easily see all your
+// times from when you sent a request)
+// let request_log: Vec<String> = Vec::new();
     
     loop {
         println!("Start of loop!");
@@ -93,10 +112,16 @@ fn main() {
                 list_files();
                 break;
             }
+            // "write" => {
+            //     write()
+            //     .expect("ERROING WRITEING TO FILE ");
+            //     break;
+            // }
             "get" => {
                 let url = url_input_closure();
-                get(url)
+                get(url,get_time())
                 .expect("Error sending get request!");
+
              break;
             }
             _ => {
