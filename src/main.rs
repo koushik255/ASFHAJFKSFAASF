@@ -3,6 +3,7 @@ use chrono::{Utc};
 use chrono_tz::America::New_York;
 use std::fs;
 use reqwest::Error;
+use std::path::PathBuf;
 
 
 
@@ -22,10 +23,18 @@ async fn get(url: &str,time: String) -> Result<(), Error> {
 }
 
 fn write(name: String, body: String) -> std::io::Result<()>{
-    fs::write(name,body)?;
+    // let mut dir = String::new();
+    let mut dir2 = PathBuf::from("get_responses");
+    dir2.push("logs");
+    let filename = name;
+    let content = body;
+    fs::create_dir_all(&dir2)?;
+    println!("directory exits!: {:?}", dir2);
+    let file_path = dir2.join(filename);
+    fs::write(&file_path,content)?;
+    println!("wrote file to : {:?}", file_path);
     Ok(())
 }
-
 
 // i can make it so the tokio response stores the info in 
 // a file because it give acces to file system
