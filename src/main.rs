@@ -1,6 +1,6 @@
 use clap::{command,Arg};
 use reqwest::Error;
-use lib::{get_time,list_files,read_all_files_in_folder,write};
+use lib::{get_time,read_all_files_in_folder,write};
 
 
 
@@ -55,6 +55,7 @@ fn main() {
 };
 
 
+
     
     loop {
         println!("Start of loop!");
@@ -63,7 +64,7 @@ fn main() {
             "time" => {
                 let tsz = get_time();
                 println!("{}",tsz);
-                list_files();
+                // list_files();
                 break;
             }
             "file" => {

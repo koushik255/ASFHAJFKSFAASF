@@ -28,7 +28,7 @@ use::std::io::Write;
 // write used in http / get func
 
 pub fn write(name: String, body: String, url: &str) -> std::io::Result<()>{
-    let mut dir2 = PathBuf::from("get_responses");
+    let mut dir2 = PathBuf::from("/home/koushikk/Documents/Rust/rustcli/bomba/src/get_responses");
     dir2.push("logs");
     let filename = name + ".txt";
     fs::create_dir_all(&dir2)?;
@@ -64,6 +64,7 @@ pub fn get_time() -> String{
 }
 
 
+// ya ya ya
 pub fn list_files_goated() -> io::Result<Vec<String>> {
     fs::read_dir("./get_responses/logs")?
     .map(|res| res.map (|e| e.path().display().to_string()))
@@ -74,11 +75,12 @@ pub fn list_files_goated() -> io::Result<Vec<String>> {
 
 
 pub fn read_all_files_in_folder() {
-    let dir_path = "./get_responses/logs";
+    let dir_path = "/home/koushikk/Documents/Rust/rustcli/bomba/src/get_responses/logs";
 
     println!("Scanning for all files in: {}", dir_path);
 
     // WalkDir will recursively explore subdirectories.
+    // ya yya ya
     for entry in WalkDir::new(dir_path).into_iter().filter_map(|e| e.ok()) {
         let path = entry.path();
 
@@ -94,9 +96,6 @@ pub fn read_all_files_in_folder() {
                     .lines()
                     .filter(|line|line.contains("url"))
                     .collect();
-                    
-                    
-                
                     
                 // if there no line.contains url
                 //false write request link to file 
@@ -118,10 +117,10 @@ pub fn read_all_files_in_folder() {
 
 
 // used in main loop can easily get rid of this func tho 
-pub fn list_files() {
-    let files = list_files_goated().unwrap();
-    // println!("files : {:?}\n", files);
-    for file in files {
-        println!("{:?}",file)
-    }
-}
+// pub fn list_files() {
+//     let files = list_files_goated().unwrap();
+//     // println!("files : {:?}\n", files);
+//     for file in files {
+//         println!("{:?}",file)
+//     }
+// }

@@ -1,0 +1,7 @@
+ Path : /home/koushikk/Documents/Rust/rustcli/bomba/src/get_responses/logs/logs/7:34  PM.txt
+ url : http://localhost:8080/
+
+Welcome to the main page!
+HELLO BLUD
+{  }
+
