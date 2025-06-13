@@ -1,0 +1,19 @@
+ Path : get_responses/logs/4:00  PM.txt
+ URL : http://localhost:8080/
+Welcome to the main page!
+HELLO BLUD
+{  }
+
+ Path : get_responses/logs/4:00  PM.txt
+ URL : https://httpbin.org/get
+{
+  "args": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Host": "httpbin.org", 
+    "X-Amzn-Trace-Id": "Root=1-684c836d-16ccaf4d7618b6370b75e687"
+  }, 
+  "origin": "99.255.0.238", 
+  "url": "https://httpbin.org/get"
+}
+

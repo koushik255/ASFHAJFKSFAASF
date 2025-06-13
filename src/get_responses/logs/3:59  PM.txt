@@ -1,0 +1,5 @@
+ Path : get_responses/logs/3:59  PM.txt
+Welcome to the main page!
+HELLO BLUD
+{  }
+

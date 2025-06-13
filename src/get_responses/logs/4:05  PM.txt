@@ -1,0 +1,7 @@
+ Path : get_responses/logs/4:05  PM.txt
+ url : http://localhost:8080/
+
+Welcome to the main page!
+HELLO BLUD
+{  }
+
