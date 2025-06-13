@@ -13,3 +13,4 @@ reqwest = "0.12.20"
 time = { version = "0.3.41", features = ["formatting"] }
 tokio = { version = "1.45.1", features = ["full"] }
 tzdb = "0.7.2"
+walkdir = "2.5.0"
