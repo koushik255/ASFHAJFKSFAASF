@@ -101,14 +101,27 @@ pub fn handle_match(input: &str, url: Option<&str>) {
             match url {
                 Some(url) => {
                     println!("get command with URL : {}",url);
+                     get(url,get_time())
+                         .expect("Error sending url")
+    
                 }
                 None => {
                     println!("Get command required a url");
                 }
+        }}
+        "post" => {
+            match url {
+                Some(url) => {
+                    println!("Get command with URL : {}", url);
+                    }
+                None => {
+                    println!("Post command requires a url");
+                    }
+                }
             }
                        
            
-        }
+        
         _ => {
             println!("{}", input);
             

@@ -29,6 +29,7 @@ fn main() {
         // use closure so that it can see the matches variable
         // if it was a function i would pass it in? i think
         // i tried that and it didnt work 
+    // // changed my life
     let url: Option<&str> = matches.get_one::<String>("url").map(|s|s.trim());
 
 
