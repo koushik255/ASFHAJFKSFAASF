@@ -1,7 +1,7 @@
 use chrono::{Utc};
 use chrono_tz::America::New_York;
 use std::fs;
-// use reqwest::Error;
+use reqwest::Error;
 use std::path::PathBuf;
 use std::io;
 use walkdir::WalkDir;
@@ -26,6 +26,21 @@ use::std::io::Write;
 // }
 
 // write used in http / get func
+#[tokio::main]
+pub async fn get(url: &str,time: String) -> Result<(), Error> {
+    let response = reqwest::get(url)
+    .await?
+    .text()
+    .await?;
+    println!("{}sent at :{}",response,time);
+    write(time,response,url)
+    .expect("ERROING WRITEING RESPONSE FILE");
+    Ok(())
+}
+
+
+
+
 
 pub fn write(name: String, body: String, url: &str) -> std::io::Result<()>{
     let mut dir2 = PathBuf::from("/home/koushikk/Documents/Rust/rustcli/bomba/src/get_responses");
@@ -33,8 +48,7 @@ pub fn write(name: String, body: String, url: &str) -> std::io::Result<()>{
     let filename = name + ".txt";
     fs::create_dir_all(&dir2)?;
     println!("directory exits!: {:?}", dir2);
-    let file_path = dir2.join(filename);
-    
+    let file_path = dir2.join(filename);   
     let mut file = OpenOptions::new()
     .append(true)
     .create(true)
@@ -49,7 +63,6 @@ pub fn write(name: String, body: String, url: &str) -> std::io::Result<()>{
     println!("wrote file to : {:?}", file.metadata()?.len());
     Ok(())
 }
-
 
 pub fn get_time() -> String{
     let utc_now = Utc::now();
@@ -71,7 +84,41 @@ pub fn list_files_goated() -> io::Result<Vec<String>> {
     .collect()
 }
 
+pub fn handle_match(input: &str, url: Option<&str>) {
+    println!("Start of match statement");
 
+    match input {
+        "time" => {
+            let tsz = get_time();
+            println!("The time is {}",tsz);
+            
+        }
+        "file" => {
+            read_all_files_in_folder();
+            
+        }
+        "get" => {
+            match url {
+                Some(url) => {
+                    println!("get command with URL : {}",url);
+                }
+                None => {
+                    println!("Get command required a url");
+                }
+            }
+                       
+           
+        }
+        _ => {
+            println!("{}", input);
+            
+        }
+
+    }
+
+
+
+} 
 
 
 pub fn read_all_files_in_folder() {
