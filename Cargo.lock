@@ -813,6 +813,8 @@ dependencies = [
  "fs",
  "full",
  "reqwest",
+ "serde",
+ "serde_json",
  "time",
  "tokio",
  "tzdb",

@@ -7,7 +7,15 @@ use std::io;
 use walkdir::WalkDir;
 use::std::fs::OpenOptions;
 use::std::io::Write;
+use serde ::{Deserialize, Serialize};
 
+
+
+// #[derive(Serialize, Deserialize, Debug)]
+// struct MyData {
+//     name: String,
+//     value: i32,
+// }
 
 
 
@@ -24,6 +32,55 @@ use::std::io::Write;
 //     .expect("ERROING WRITEING RESPONSE FILE");
 //     Ok(())
 // }
+//
+#[derive(Serialize, Deserialize, Debug)]
+struct MyData {
+    name: String,
+    value: i32,
+}
+
+#[tokio::main]
+pub async fn post(url: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let client = reqwest::Client::new();
+
+    // create data to send in the post request
+    
+    let data = MyData {
+        name:"shikshikshiks".to_string(),
+        value:42,
+    };
+ 
+    let json_data = serde_json::to_string(&data)?;
+
+
+    // send the post
+    let response = client
+        .post(url)
+        .header("Content-Type","application/json")
+        .body(json_data)
+        .send()
+        .await?;
+
+
+    // check if it was succesfull 
+    if response.status().is_success() {
+        //parse 
+        let response_body = response.text().await?;
+            println!("Response: {}",response_body);
+        } else {
+            println!("Request failed: {}", response.status());
+    }
+    Ok(())
+}
+
+
+
+
+
+
+
+
+
 
 // write used in http / get func
 #[tokio::main]
@@ -112,7 +169,9 @@ pub fn handle_match(input: &str, url: Option<&str>) {
         "post" => {
             match url {
                 Some(url) => {
-                    println!("Get command with URL : {}", url);
+                    println!("post command with URL : {}", url);
+                    post(url)
+                        .expect("Erorr sending url")
                     }
                 None => {
                     println!("Post command requires a url");
