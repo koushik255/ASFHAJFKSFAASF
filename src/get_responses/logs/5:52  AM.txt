@@ -1,0 +1,6 @@
+ Path : /home/koushikk/Documents/Rust/rustcli/bomba/src/get_responses/logs/5:52  AM.txt
+ url : http://localhost:8080/
+
+{"name":"shikshikshiks","value":42}
+HELLO FROM HANDLERFUNC {shikshikshiks 42}
+

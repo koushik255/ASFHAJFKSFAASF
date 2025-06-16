@@ -67,6 +67,8 @@ pub async fn post(url: &str) -> Result<(), Box<dyn std::error::Error>> {
         //parse 
         let response_body = response.text().await?;
             println!("Response: {}",response_body);
+            write(get_time(),response_body,url)
+                .expect("Error writeing post request to file");
         } else {
             println!("Request failed: {}", response.status());
     }
@@ -115,6 +117,10 @@ pub fn write(name: String, body: String, url: &str) -> std::io::Result<()>{
 
     writeln!(file," url : {}\n",url)?;
 
+   
+
+
+
     writeln!(file,"{}",body)?;
 
     println!("wrote file to : {:?}", file.metadata()?.len());
@@ -129,7 +135,6 @@ pub fn get_time() -> String{
     let hour = ny_time.format("%I:%M  %p").to_string();
     let hour = hour.trim_start_matches('0');
     let hour = hour.to_string();
-
     return hour
 }
 
